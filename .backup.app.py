@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Konfigurasi Gemini API
 genai.configure(api_key="AIzaSyCFMndoZfwY8SxWi2Qr09fnS_ABH31f-tg")
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro-vision')
 
 # Konfigurasi keamanan
 safety_settings = {
