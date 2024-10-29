@@ -8,8 +8,7 @@ import base64
 app = Flask(__name__)
 
 # Konfigurasi Gemini API
-import os
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key="AIzaSyCFMndoZfwY8SxWi2Qr09fnS_ABH31f-tg")
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Konfigurasi keamanan
