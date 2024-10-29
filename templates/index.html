@@ -4,85 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roasting Foto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        #loading {
-            display: none;
-            font-style: italic;
-            color: #666;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        #uploaded-image {
-            max-width: 100%;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Foto Motivasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
-<body>
-    <h1>Roasting Foto</h1>
-    <form id="upload-form" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
-        <button type="submit">Submit</button>
-    </form>
-    <div id="loading">Sedang memasak roasting yang pedas... Sabar ya, jangan kepedesan!</div>
-    <img id="uploaded-image" style="display: none;">
-    <div id="result"></div>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div id="app" class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">Foto Motivasi</h1>
+        <form @submit.prevent="uploadImage" class="mb-6">
+            <div class="mb-4">
+                <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Pilih Foto</label>
+                <input type="file" id="file" ref="file" @change="handleFileUpload" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Upload & Dapatkan Motivasi
+            </button>
+        </form>
+        <div v-if="loading" class="text-center mb-4">
+            <p class="text-lg font-medium text-indigo-600" v-text="loadingText"></p>
+        </div>
+        <div v-if="imageUrl" class="mb-6">
+            <img :src="imageUrl" alt="Uploaded image" class="w-full rounded-md shadow-sm">
+        </div>
+        <div v-if="result" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md" v-html="result"></div>
+    </div>
 
     <script>
-        const form = document.getElementById('upload-form');
-        const loading = document.getElementById('loading');
-        const result = document.getElementById('result');
-        const uploadedImage = document.getElementById('uploaded-image');
+    new Vue({
+        el: '#app',
+        data: {
+            file: null,
+            imageUrl: null,
+            result: null,
+            loading: false,
+            loadingTexts: [
+                "Mengaduk motivasi dalam panci...",
+                "Merebus kata-kata penyemangat...",
+                "Menumis ide-ide positif...",
+                "Menggoreng optimisme sampai garing...",
+                "Membakar semangat di atas api semangat...",
+                "Menaburkan bumbu kebahagiaan...",
+                "Mengukus kepercayaan diri hingga matang...",
+            ],
+            loadingText: ""
+        },
+        methods: {
+            handleFileUpload(event) {
+                this.file = event.target.files[0];
+                this.imageUrl = URL.createObjectURL(this.file);
+            },
+            uploadImage() {
+                if (!this.file) {
+                    alert("Pilih foto terlebih dahulu!");
+                    return;
+                }
+                this.loading = true;
+                this.result = null;
+                this.changeLoadingText();
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            
-            loading.style.display = 'block';
-            result.innerHTML = '';
-            uploadedImage.style.display = 'none';
+                const formData = new FormData();
+                formData.append('file', this.file);
 
-            try {
-                const response = await fetch('/', {
+                fetch('/', {
                     method: 'POST',
                     body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.result = data.roast.replace(/\n/g, '<br>');
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    this.result = "Terjadi kesalahan. Silakan coba lagi.";
+                    this.loading = false;
                 });
-                const data = await response.json();
-                
-                if (data.error) {
-                    result.innerHTML = `<p style="color: red;">${data.error}</p>`;
-                } else {
-                    result.innerHTML = `<p>${data.roast}</p>`;
-                    
-                    // Tampilkan gambar yang diupload
-                    const file = formData.get('file');
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        uploadedImage.src = e.target.result;
-                        uploadedImage.style.display = 'block';
+            },
+            changeLoadingText() {
+                const changeText = () => {
+                    if (this.loading) {
+                        this.loadingText = this.loadingTexts[Math.floor(Math.random() * this.loadingTexts.length)];
+                        setTimeout(changeText, 2000);
                     }
-                    reader.readAsDataURL(file);
-                }
-            } catch (error) {
-                result.innerHTML = '<p style="color: red;">Terjadi kesalahan. Silakan coba lagi.</p>';
-            } finally {
-                loading.style.display = 'none';
+                };
+                changeText();
             }
-        });
+        }
+    });
     </script>
 </body>
 </html>
