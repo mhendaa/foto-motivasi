@@ -17,3 +17,41 @@
  * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_unary.py', reloading
  * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_base.py', reloading
  * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/timeout.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/grpc_helpers.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/grpc/_channel.py', reloading
+127.0.0.1 - - [29/Oct/2024 12:31:16] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/dist-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/user/app.py", line 45, in index
+    response = model.generate_content(
+  File "/usr/local/lib/python3.10/dist-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "/usr/local/lib/python3.10/dist-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 830, in generate_content
+    response = rpc(
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.NotFound: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
+ * Restarting with watchdog (inotify)
