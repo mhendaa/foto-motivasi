@@ -41,3 +41,4 @@
  * Detected change in '/usr/local/lib/python3.10/dist-packages/werkzeug/utils.py', reloading
  * Detected change in '/usr/lib/python3.10/typing.py', reloading
  * Detected change in '/usr/lib/python3.10/collections/__init__.py', reloading
+ * Restarting with watchdog (inotify)
