@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roasting Foto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #loading {
+            display: none;
+            font-style: italic;
+            color: #666;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #uploaded-image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Roasting Foto</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="loading">Sedang memasak roasting yang pedas... Sabar ya, jangan kepedesan!</div>
+    <img id="uploaded-image" style="display: none;">
+    <div id="result"></div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+        const uploadedImage = document.getElementById('uploaded-image');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            loading.style.display = 'block';
+            result.innerHTML = '';
+            uploadedImage.style.display = 'none';
+
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    result.innerHTML = `<p style="color: red;">${data.error}</p>`;
+                } else {
+                    result.innerHTML = `<p>${data.roast}</p>`;
+                    
+                    // Tampilkan gambar yang diupload
+                    const file = formData.get('file');
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        uploadedImage.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            } catch (error) {
+                result.innerHTML = '<p style="color: red;">Terjadi kesalahan. Silakan coba lagi.</p>';
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
