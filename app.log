@@ -7,3 +7,4 @@
  * Debugger is active!
  * Debugger PIN: 259-446-379
 127.0.0.1 - - [29/Oct/2024 12:41:54] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [29/Oct/2024 12:42:07] "GET / HTTP/1.1" 200 -
