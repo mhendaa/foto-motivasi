@@ -13,10 +13,10 @@ model = genai.GenerativeModel('gemini-pro-vision')
 
 # Konfigurasi keamanan
 safety_settings = {
-    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
 }
 
 @app.route('/', methods=['GET', 'POST'])
