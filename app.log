@@ -55,3 +55,5 @@ Traceback (most recent call last):
     raise exceptions.from_grpc_error(exc) from exc
 google.api_core.exceptions.NotFound: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
  * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 259-446-379
