@@ -10,3 +10,4 @@
 127.0.0.1 - - [29/Oct/2024 12:33:34] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [29/Oct/2024 12:33:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
 127.0.0.1 - - [29/Oct/2024 12:34:18] "POST / HTTP/1.1" 200 -
+ * Detected change in '/home/user/app.py', reloading

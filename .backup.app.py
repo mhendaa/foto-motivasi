@@ -39,7 +39,7 @@ def index():
                 }
             ]
             
-            prompt = "Berikan pujian dan motivasi positif dalam bahasa Indonesia yang santai dan lucu berdasarkan foto ini. Fokus pada aspek-aspek positif dan berikan dorongan yang membangun."
+            prompt = "Roasting foto ini dengan bahasa Indonesia yang santai, lucu, penuh olokan dan ejekan, serta hinaan dengan kata-kata kotor. Jangan segan-segan, buat sekasar mungkin!"
             
             # Generate konten
             response = model.generate_content(
