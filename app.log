@@ -9,3 +9,11 @@
 127.0.0.1 - - [29/Oct/2024 12:30:39] "HEAD / HTTP/1.1" 200 -
 127.0.0.1 - - [29/Oct/2024 12:31:02] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [29/Oct/2024 12:31:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/flask/app.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/generativeai/generative_models.py', reloading
+ * Detected change in '/home/user/app.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/gapic_v1/method.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_unary.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/retry/retry_base.py', reloading
+ * Detected change in '/usr/local/lib/python3.10/dist-packages/google/api_core/timeout.py', reloading
